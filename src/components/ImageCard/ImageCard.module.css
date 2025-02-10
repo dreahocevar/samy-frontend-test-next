@@ -39,11 +39,11 @@
   display: block;
 }
 
-/* Contenedor para el precio y el SVG decorativo */
+/* Nuevo contenedor para el precio y el SVG decorativo */
 .priceWrapper {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 80px;
   height: 40px;
   z-index: 2;
@@ -85,10 +85,9 @@
   gap: 2px;
   color: white;
   font-size: 16px;
-  padding: 0px 8px;
+  padding: 0 8px;
 }
 
-/* Clase para el icono de like */
 .actionsImg {
   width: 28px;
   height: 28px;
@@ -96,7 +95,6 @@
   transition: transform 0.2s;
 }
 
-/* Animación al dar like */
 @keyframes likePop {
   0% {
     transform: scale(1);
@@ -129,6 +127,10 @@
   font-size: 24px;
   font-weight: 400;
   text-transform: uppercase;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .detailsP {
@@ -145,4 +147,90 @@
   color: black;
   font-weight: 700;
   line-height: 1.2;
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 600px) {
+  .imageGrid {
+    grid-template-columns: 1fr;
+  }
+  .imageCard {
+    /* Puede ajustarse el ancho, márgenes o padding si lo requieres */
+    padding-bottom: 8px;
+  }
+
+  .imageContainer {
+    /* Aumentamos el padding-bottom para mantener la relación de aspecto */
+    padding-bottom: 80%;
+  }
+
+  .priceWrapper {
+    width: 60px;
+    height: 30px;
+  }
+
+  .priceText {
+    font-size: 12px;
+  }
+
+  .actionsDiv {
+    font-size: 14px;
+    padding: 0 4px;
+  }
+
+  .actionsImg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .detailsH3 {
+    font-size: 20px;
+  }
+
+  .detailsP,
+  .detailsSpan {
+    font-size: 12px;
+  }
+}
+
+/* Media Queries para tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .imageGrid {
+    grid-template-columns: 1fr;
+  }
+  .imageCard {
+    padding-bottom: 10px;
+  }
+
+  .imageContainer {
+    padding-bottom: 75%; /* Ajusta si es necesario */
+  }
+
+  .priceWrapper {
+    width: 70px;
+    height: 35px;
+  }
+
+  .priceText {
+    font-size: 13px;
+  }
+
+  .actionsDiv {
+    font-size: 15px;
+    padding: 0 6px;
+  }
+
+  .actionsImg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .detailsH3 {
+    font-size: 22px;
+  }
+
+  .detailsP,
+  .detailsSpan {
+    font-size: 13px;
+  }
 }

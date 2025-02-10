@@ -13,6 +13,5 @@
   gap: 16px;
   width: 100%;
   box-sizing: border-box;
-  grid-template-columns: repeat(3, 1fr);
   overflow-x: hidden;
 }
