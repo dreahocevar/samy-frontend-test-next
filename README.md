@@ -103,3 +103,13 @@ describe("ImageCard", () => {
 - **TypeScript** – For type safety and better development experience
 - **Jest** – Testing framework
 - **React Testing Library** – For testing React components
+
+### 🚧 Roadmap and improvements
+
+- [ ] Expand test coverage to include more edge cases and ensure robust error handling and state transitions.
+- [ ] Refactor the image gallery to support more advanced **pagination techniques**.
+- [ ] Improve accessibility by ensuring **keyboard navigation** and ensuring **descriptive alt text** for images.
+- [ ] Responsive improvements
+- [ ] Use the Web Share API (or similar) to link to social media platforms
+- [ ] Show more information about the price when the user hovers or clicks on the tag using a tooltip or popover.
+- [ ] Implement retry logic in case of failed network requests, to enhance reliability and user experience.
