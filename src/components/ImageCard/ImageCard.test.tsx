@@ -1,4 +1,3 @@
-// ImageCard.test.tsx
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
@@ -6,7 +5,6 @@ import { ImageCard, ImageData } from "./ImageCard";
 import { LIKE_IMAGE } from "../../graphql/mutations";
 import "@testing-library/jest-dom";
 
-// Sample image data for the test
 const testImage: ImageData = {
   id: "1",
   title: "Test Image",
@@ -17,7 +15,6 @@ const testImage: ImageData = {
   author: "Test Author",
 };
 
-// Mock for the GraphQL mutation, typed as ReadonlyArray<MockedResponse>
 const mocks: ReadonlyArray<MockedResponse> = [
   {
     request: {
@@ -45,15 +42,11 @@ describe("ImageCard Component", () => {
       </MockedProvider>
     );
 
-    // Check the initial likes count (should be 10)
     expect(screen.getByText("10")).toBeInTheDocument();
 
-    // The like action is triggered by clicking on the element with alt text "Like".
     const likeButton = screen.getByAltText("Like");
     fireEvent.click(likeButton);
 
-    // Wait for the UI to update. Once the mutation resolves,
-    // the likes count should update from 10 to 11.
     await waitFor(() => {
       expect(screen.getByText("11")).toBeInTheDocument();
     });

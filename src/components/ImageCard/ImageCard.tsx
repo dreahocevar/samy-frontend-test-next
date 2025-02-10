@@ -1,4 +1,3 @@
-// src/components/ImageCard/ImageCard.tsx
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { LIKE_IMAGE } from "../../graphql/mutations";
