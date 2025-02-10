@@ -1,0 +1,31 @@
+/* src/components/Header/Header.module.css */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+  background-color: white;
+  height: 120px;
+}
+
+.logoContainer {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.searchContainer {
+  margin-left: auto;
+}
+
+.searchInput {
+  width: 270px;
+  height: 30px;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+}
