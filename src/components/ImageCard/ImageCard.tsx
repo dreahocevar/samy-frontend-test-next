@@ -68,8 +68,8 @@ export function ImageCard({ image }: ImageCardProps) {
           <Image
             src="/corner.svg"
             alt="price background"
-            fill
-            style={{ objectFit: "contain" }}
+            width={40}
+            height={40}
             className={styles.cornerSvg}
           />
           <span className={styles.priceText}>{image.price} €</span>

@@ -1,4 +1,3 @@
-// src/components/Header/Header.tsx
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./Header.module.css";
@@ -22,13 +21,22 @@ const Header: React.FC = () => {
       </div>
 
       <form onSubmit={handleSearchSubmit} className={styles.searchContainer}>
-        <input
-          type="text"
-          placeholder="You're looking for something"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className={styles.searchInput}
-        />
+        <div className={styles.searchInputWrapper}>
+          <Image
+            src="/searchicon.png"
+            alt="Search Icon"
+            width={20}
+            height={20}
+            className={styles.searchIcon}
+          />
+          <input
+            type="text"
+            placeholder="You're looking for something?"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className={styles.searchInput}
+          />
+        </div>
       </form>
     </header>
   );

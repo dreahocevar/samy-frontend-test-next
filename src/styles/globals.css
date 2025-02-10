@@ -5,5 +5,5 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
-  overflow-x: hidden; /* Esto evita el scroll horizontal */
+  overflow-x: hidden;
 }

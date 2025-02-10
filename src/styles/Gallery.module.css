@@ -1,17 +1,33 @@
 .galleryContainer {
-  /* Asegura que el contenedor tenga suficiente altura para generar scroll */
   min-height: 100vh;
   overflow-y: auto;
   width: 100%;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 80px;
+  display: flex; /* Use flexbox to center content */
+  justify-content: center; /* Centers content horizontally */
+  align-items: flex-start; /* Centers content vertically if there's more content */
+  background-color: #f6f6f6;
 }
 
 .imageGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  width: 100%;
+  gap: 24px;
+  width: 80%;
+  max-width: 1440px; /* Restrict the grid width */
   box-sizing: border-box;
-  overflow-x: hidden;
+}
+
+/* Para dispositivos móviles y tablets: se muestra una sola columna */
+@media (max-width: 1024px) {
+  .imageGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Para desktop: se muestran 3 columnas por fila */
+@media (min-width: 1025px) {
+  .imageGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
