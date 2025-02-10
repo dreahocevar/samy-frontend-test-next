@@ -96,7 +96,7 @@ describe("ImageCard", () => {
 
 ```
 
-### 📦 Built With
+## 📦 Built With
 
 - **Next.js** – React framework
 - **Apollo Client** – For GraphQL data fetching
@@ -104,7 +104,7 @@ describe("ImageCard", () => {
 - **Jest** – Testing framework
 - **React Testing Library** – For testing React components
 
-### 🚧 Roadmap and improvements
+## 🚧 Roadmap and improvements
 
 - [ ] Expand test coverage to include more edge cases and ensure robust error handling and state transitions.
 - [ ] Refactor the image gallery to support more advanced **pagination techniques**.
