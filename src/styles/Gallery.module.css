@@ -4,9 +4,9 @@
   width: 100%;
   box-sizing: border-box;
   padding: 80px;
-  display: flex; /* Use flexbox to center content */
-  justify-content: center; /* Centers content horizontally */
-  align-items: flex-start; /* Centers content vertically if there's more content */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   background-color: #f6f6f6;
 }
 
@@ -15,18 +15,16 @@
   display: grid;
   gap: 24px;
   width: 80%;
-  max-width: 1440px; /* Restrict the grid width */
+  max-width: 1440px;
   box-sizing: border-box;
 }
 
-/* Para dispositivos móviles y tablets: se muestra una sola columna */
 @media (max-width: 1024px) {
   .imageGrid {
     grid-template-columns: 1fr;
   }
 }
 
-/* Para desktop: se muestran 3 columnas por fila */
 @media (min-width: 1025px) {
   .imageGrid {
     grid-template-columns: repeat(3, 1fr);

@@ -22,7 +22,6 @@ interface ImageCardProps {
 export function ImageCard({ image }: ImageCardProps) {
   const [liked, setLiked] = useState(image.liked);
   const [likesCount, setLikesCount] = useState(image.likesCount);
-  // Estado para activar la animación
   const [animate, setAnimate] = useState(false);
 
   const [likeImage] = useMutation(LIKE_IMAGE, {
@@ -38,19 +37,18 @@ export function ImageCard({ image }: ImageCardProps) {
       } else {
         setLiked(true);
         setLikesCount((prev) => prev + 1);
-        setAnimate(true); // Activa la animación al dar like
+        setAnimate(true);
       }
     } catch (error) {
       console.error("Error al dar like:", error);
     }
   };
 
-  // Remover la animación después de un tiempo
   useEffect(() => {
     if (animate) {
       const timer = setTimeout(() => {
         setAnimate(false);
-      }, 300); // Duración de la animación (debe coincidir con la duración en CSS)
+      }, 300);
       return () => clearTimeout(timer);
     }
   }, [animate]);
@@ -61,7 +59,8 @@ export function ImageCard({ image }: ImageCardProps) {
         <Image
           src={image.picture}
           alt={image.title}
-          layout="fill"
+          fill
+          sizes="(max-width: 400px) 30vw, (max-width: 360px) "
           style={{ objectFit: "cover" }}
         />
         <div className={styles.priceWrapper}>
@@ -76,7 +75,6 @@ export function ImageCard({ image }: ImageCardProps) {
         </div>
         <div className={styles.actions}>
           <div className={styles.actionsDiv} onClick={handleLike}>
-            {/* Aplica la clase de animación condicionalmente */}
             <Image
               className={`${styles.actionsImg} ${
                 animate ? styles.likeAnimation : ""

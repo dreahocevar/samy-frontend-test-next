@@ -1,5 +1,4 @@
-// src/pages/Gallery.tsx
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_IMAGES } from "../graphql/queries";
 import { ImageCard } from "../components/ImageCard/ImageCard";
@@ -42,21 +41,39 @@ const Gallery: React.FC = () => {
     notifyOnNetworkStatusChange: true,
   });
 
-  // Extraemos las imágenes y la paginación si ya hay datos, o asignamos valores por defecto.
+  const [loadingMore, setLoadingMore] = useState(false);
+
   const images: ImageData[] = data
     ? data.images.edges.map(({ node }) => node)
     : [];
   const hasNextPage: boolean = data ? data.images.pageInfo.hasNextPage : false;
   const endCursor: string | null = data ? data.images.pageInfo.endCursor : null;
 
-  // Función para cargar más imágenes
+  console.log("hasNextPage:", hasNextPage);
+  console.log("endCursor:", endCursor);
+
   const loadMore = useCallback(() => {
-    console.log("loadmorellamado"); // <-- Agrega este log
+    console.log("loadMore called");
+
+    if (loadingMore || !hasNextPage) {
+      console.log("No more images to load or already loading");
+      return;
+    }
+    setLoadingMore(true);
+
+    console.log("Fetching more images...");
+    console.log("End Cursor: ", endCursor);
 
     fetchMore({
       variables: { first: ITEMS_PER_PAGE, after: endCursor },
       updateQuery: (prevResult, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prevResult;
+        setLoadingMore(false);
+        if (!fetchMoreResult) {
+          console.log("No more images returned by fetchMore");
+          return prevResult;
+        }
+
+        console.log("Fetched more images");
         return {
           images: {
             __typename: prevResult.images.__typename,
@@ -69,32 +86,45 @@ const Gallery: React.FC = () => {
         };
       },
     });
-  }, [endCursor, fetchMore]);
+  }, [endCursor, hasNextPage, fetchMore, loadingMore]);
 
-  // Función que detecta el scroll cerca del final de la página
   const handleScroll = useCallback(() => {
-    console.log("handleScroll llamado"); // <-- Agrega este log
+    console.log("handleScroll called");
 
-    if (loading) return; // Evita llamadas mientras se está cargando
-    if (!hasNextPage) return; // No hay más datos que cargar
+    if (loadingMore || loading) {
+      console.log("Still loading or already fetching images");
+      return;
+    }
+    if (!hasNextPage) {
+      console.log("No more images to load");
+      return;
+    }
+
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
     const docHeight = document.documentElement.offsetHeight;
-    // Si el usuario está a 200px o menos del final, carga más imágenes.
+
+    console.log("Scroll position: ", scrollTop);
+    console.log("Window height: ", windowHeight);
+    console.log("Document height: ", docHeight);
+
     if (scrollTop + windowHeight >= docHeight - 200) {
+      console.log("Triggering loadMore due to scroll near bottom");
       loadMore();
     }
-  }, [loading, hasNextPage, loadMore]);
+  }, [loadingMore, loading, hasNextPage, loadMore]);
 
-  // Agrega y remueve el listener del scroll
   useEffect(() => {
+    console.log("Adding scroll event listener");
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      console.log("Removing scroll event listener");
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [handleScroll]);
 
   return (
     <div className={styles.galleryContainer}>
-      {/* Muestra un mensaje de carga inicial si no hay datos */}
       {loading && !data && <p>Loading...</p>}
       {error && <p>Oops, something went wrong</p>}
       {data && (
@@ -104,7 +134,7 @@ const Gallery: React.FC = () => {
               <ImageCard key={image.id} image={image} />
             ))}
           </div>
-          {loading && <p>Cargando más imágenes...</p>}
+          {loadingMore && <p>Loading more images...</p>}
         </>
       )}
     </div>

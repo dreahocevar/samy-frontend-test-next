@@ -44,7 +44,6 @@
   background-color: #f2f2f2;
 }
 
-/* Media Queries for responsiveness */
 @media (max-width: 600px) {
   .header {
     padding: 10px;
