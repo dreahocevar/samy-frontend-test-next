@@ -41,16 +41,16 @@ This project uses a **GraphQL** API to fetch images and handle the "like" functi
 2. LIKE_IMAGE Mutation:
    This mutation allows users to "like" an image, it returns the full ❤️heart❤️ with the new likesCount.
 
-```
+```graphql
 mutation LikeImage($input: LikeImageInput!) {
-likeImage(input: $input) {
- success
- image {
-   id
-   liked
-   likesCount
- }
-}
+  likeImage(input: $input) {
+    success
+    image {
+      id
+      liked
+      likesCount
+    }
+  }
 }
 ```
 
