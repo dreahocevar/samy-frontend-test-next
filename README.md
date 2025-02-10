@@ -1,40 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+A React app built with Next.js and Apollo Client for displaying images, with infinite scroll and like button functionality.
 
-## Getting Started
+## Features
 
-First, run the development server:
+- [ ] Infinite Scroll: Loads more images as the user scrolls down.
+- [ ] Like Button: Users can like an image, and the like count updates.
+- [ ] Responsive Design: Works on desktop, tablet, and mobile.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🛠️ Setup
+
+1. Clone the repository
+
+```
+git clone https://github.com/yourusername/samy-frontend-test.git cd samy-frontend-test`
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+3. Run the development server
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🚀 Open your browser and go to http://localhost:3000. 🚀
 
-## Learn More
+### 🧪 Testing Setup
 
-To learn more about Next.js, take a look at the following resources:
+1. Install testing dependencies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom @testing-library/user-event @apollo/client @apollo/client/testing babel-jest
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Run tests
 
-## Deploy on Vercel
+```
+npm test
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Example Test
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+```
+
+import { render, screen, fireEvent } from "@testing-library/react";
+import { MockedProvider } from "@apollo/client/testing";
+import { ImageCard } from "./ImageCard";
+import { LIKE_IMAGE } from "../../graphql/mutations";
+
+const mockImage = {
+  id: "1",
+  title: "Test Image",
+  liked: false,
+  likesCount: 10,
+  picture: "https://example.com/test.jpg",
+  price: 100,
+  author: "John Doe",
+};
+
+const mocks = [
+  {
+    request: {
+      query: LIKE_IMAGE,
+      variables: { input: { imageId: mockImage.id } },
+    },
+    result: {
+      data: {
+        likeImage: {
+          success: true,
+          image: { ...mockImage, liked: true, likesCount: 11 },
+        },
+      },
+    },
+  },
+];
+
+describe("ImageCard", () => {
+  test("should like an image", async () => {
+    render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <ImageCard image={mockImage} />
+      </MockedProvider>
+    );
+
+    fireEvent.click(screen.getByAltText("Like"));
+
+    expect(await screen.findByText("11")).toBeInTheDocument(); // Check if likes updated
+  });
+});
+
+```
+
+### 📦 Built With
+
+- **Next.js** – React framework
+- **Apollo Client** – For GraphQL data fetching
+- **TypeScript** – For type safety and better development experience
+- **Jest** – Testing framework
+- **React Testing Library** – For testing React components
