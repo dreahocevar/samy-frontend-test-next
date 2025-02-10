@@ -1,4 +1,4 @@
-#Samy Frontend SPA
+# Samy Frontend SPA
 
 A React app built with Next.js and Apollo Client for displaying images, with infinite scroll and like button functionality.
 
