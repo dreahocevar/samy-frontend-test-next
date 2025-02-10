@@ -1,15 +1,13 @@
-/* src/components/Header/Header.module.css */
-
 .header {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0 20px;
+  padding: 0px 20px;
   background-color: white;
   height: 120px;
   width: 100%;
-  max-width: 1440px; /* Make the header responsive with a max-width */
-  margin: 0 auto; /* Center the header horizontally */
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .logoContainer {
@@ -20,25 +18,25 @@
 }
 
 .searchContainer {
-  margin-left: auto; /* Push search to the right */
+  margin-left: auto;
 }
 
 .searchInputWrapper {
-  position: relative; /* Make the search input relative for absolute positioning of the icon */
+  position: relative;
   display: flex;
   align-items: center;
 }
 
 .searchIcon {
   position: absolute;
-  left: 12px; /* Position the icon to the left of the input */
-  z-index: 1; /* Ensure icon appears on top of input field */
+  left: 12px;
+  z-index: 1;
 }
 
 .searchInput {
   width: 270px;
   height: 30px;
-  padding: 8px 8px 8px 32px; /* Add padding to the left to accommodate the icon */
+  padding: 8px 8px 8px 32px;
   font-size: 16px;
   border: none;
   outline: none;
@@ -52,6 +50,7 @@
     padding: 10px;
     flex-direction: column;
     align-items: center;
+    justify-content: baseline;
     height: auto;
   }
 
@@ -60,7 +59,7 @@
   }
 
   .searchInputWrapper {
-    width: 100%;
+    width: 60%;
   }
 
   .searchInput {

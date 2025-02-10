@@ -11,6 +11,7 @@
 }
 
 .imageGrid {
+  position: absolute;
   display: grid;
   gap: 24px;
   width: 80%;
