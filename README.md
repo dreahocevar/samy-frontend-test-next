@@ -8,6 +8,54 @@ A React app built with Next.js and Apollo Client for displaying images, with inf
 - [ ] Like Button: Users can like an image, and the like count updates.
 - [ ] Responsive Design: Works on desktop, tablet, and mobile.
 
+## 🔌 API Overview
+
+This project uses a **GraphQL** API to fetch images and handle the "like" functionality. It allows fetching images in a paginated way and supports mutations to like images.
+
+### Key API Queries & Mutations:
+
+1. **GET_IMAGES** Query:
+   This query fetches a list of images along with their metadata (e.g., title, price, author, likes).
+
+   ```graphql
+   query GetImages($first: Int, $after: String) {
+     images(first: $first, after: $after) {
+       edges {
+         node {
+           id
+           title
+           picture
+           price
+           author
+           likesCount
+         }
+       }
+       pageInfo {
+         hasNextPage
+         endCursor
+       }
+     }
+   }
+   ```
+
+2. LIKE_IMAGE Mutation:
+   This mutation allows users to "like" an image, it returns the full ❤️heart❤️ with the new likesCount.
+
+```
+mutation LikeImage($input: LikeImageInput!) {
+likeImage(input: $input) {
+ success
+ image {
+   id
+   liked
+   likesCount
+ }
+}
+}
+```
+
+The API is integrated using Apollo Client.
+
 ## 🛠️ Setup
 
 1. Clone the repository
